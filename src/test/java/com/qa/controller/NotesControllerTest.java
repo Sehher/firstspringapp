@@ -56,18 +56,24 @@ public class NotesControllerTest {
         Note note = new Note();
         note.setName("blah");
         when(repository.findOne(1L)).thenReturn(note);
-        notesController.getNote(1L);
+        notesController.getNote(1L);//1L means 1 Long
     }
 
-//    @Test
-//    public void testGetId(){
-//        List<Note> notesList = new ArrayList<>();
-//        Note note = new Note();
-//        note.setDescription("blah");
-//        note.setName("blah");
-//        notesList.add(note);
-//
-//        assertEquals(notesController.getNote(1),"blah");
-//    }
+    @Test
+    public void testAddNote(){
+        Note note = new Note();
+        note.setName("blah");
+        note.setDescription("blah blah");
+        when(repository.saveAndFlush(note)).thenReturn(note);
+        notesController.addNote(note);
+    }
+
+    @Test
+    public void testDeleteNote(){
+        Note note = new Note();
+        note.setName("blah");
+        when(repository.findOne(1L)).thenReturn(note);
+        notesController.deleteNote(1L);
+    }
 
 }
